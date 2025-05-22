@@ -22,7 +22,7 @@ function HomePage() {
         <div className="row">
           <div className="col-12 col-md-6 col-lg-8">
             <h1 className="judul" style={{ fontWeight: "bold" }}>
-              APLIKASI Monitoring Titik Rawan Longsor
+              WEB Monitoring Titik Rawan Longsor
             </h1>
             <h1
               className="judul2"
