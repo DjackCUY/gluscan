@@ -22,7 +22,7 @@ function HomePage() {
         <div className="row">
           <div className="col-12 col-md-6 col-lg-8">
             <h1 className="judul" style={{ fontWeight: "bold" }}>
-              WEB Monitoring Lahan Pertanian
+              APLIKASI Monitoring Titik Rawan Longsor
             </h1>
             <h1
               className="judul2"
@@ -33,8 +33,8 @@ function HomePage() {
               Berbasis IoT
             </h1>
             <h5 className="subjudul">
-              Efisiensi dalam monitoring lahan pertanian serta kontrol jarak
-              jauh menggunakan perangkat mobile
+              Efisiensi dalam monitoring lahan rawan longsor secara real-time
+              menggunakan perangkat mobile
             </h5>
             <Link
               to="/chart"
