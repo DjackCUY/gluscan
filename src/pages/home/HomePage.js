@@ -206,7 +206,7 @@ function HomePage() {
                   style={{ fontSize: "13px" }}
                 >
                   Mikrokontroler utama yang bertugas sebagai otak dari semua
-                  tugas yang ada. ESP32 berfungsi menjadi penghubung antara
+                  tugas yang ada, berfungsi sebagai penghubung antara
                   komponen, web, dan user dengan MQTT.
                 </p>
               </div>
@@ -221,16 +221,13 @@ function HomePage() {
       <div className="container-fitur1">
         <div className="row">
           <div className="col-8">
-            <h3>Analisis Kesehatan Tanah</h3>
+            <h3>Deteksi Pergerakan Tanah </h3>
             <p>
-              Growbot menyediakan solusi teknologi canggih yang dirancang untuk
-              meningkatkan produktivitas pertanian melalui analisis mendalam
-              terhadap kesehatan tanah. Dengan menggunakan sensor NPK yang mampu
-              mengukur kadar nitrogen, fosfor, dan kalium secara akurat, petani
-              dapat memantau dan mengelola kondisi tanah secara real-time.
-              Teknologi ini membantu petani mengambil keputusan yang tepat dalam
-              pemupukan dan perawatan tanah, sehingga menciptakan praktik
-              pertanian yang lebih efisien, berkelanjutan, dan ramah lingkungan.
+              TerraSentry dilengkapi dengan akselerometer multi-arah berpresisi tinggi. Sensor ini mampu mendeteksi dan 
+              mengukur pergeseran atau pergerakan tanah sekecil apa pun, baik secara horizontal maupun vertikal. 
+              Dengan kapabilitas ini, TerraSentry dapat mengidentifikasi anomali pergerakan mikro yang seringkali menjadi 
+              indikator awal ketidakstabilan lereng, memberikan peringatan dini yang krusial sebelum pergerakan berkembang 
+              menjadi longsor besar. Akurasi deteksi ini sangat vital untuk keselamatan dan mitigasi risiko.
             </p>
           </div>
           <div
@@ -247,6 +244,40 @@ function HomePage() {
       </div>
       <div className="container-fitur1">
         <div className="row">
+          <div className="col-8">
+            <h3>Pengukuran Kelembapan Tanah</h3>
+            <p>
+              Faktor kunci dalam pemicu longsor adalah saturasi air pada tanah. 
+              TerraSentry mengatasi hal ini dengan sensor kelembapan tanah yang akurat. Sensor ini secara 
+              terus-menerus memantau kadar air dalam lapisan tanah, memberikan data real-time mengenai tingkat kejenuhan. 
+              Peningkatan signifikan pada kelembapan tanah akan segera terdeteksi, memungkinkan analisis risiko yang lebih 
+              mendalam dan tindakan pencegahan yang tepat waktu, terutama saat atau setelah hujan lebat.
+            </p>
+          </div>
+                    <div
+            className="col-12 col-md-6 col-lg-4"
+            style={{ marginTop: "15px" }}
+          >
+            <img
+              className="mock-up"
+              src="images/logo/mockup-hp.png"
+              alt="gambar"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="container-fitur1">
+        <div className="row">
+          <div className="col-8">
+            <h3>Pemantauan Kemiringan Tanah</h3>
+            <p>
+              Untuk analisis yang lebih komprehensif, TerraSentry mengintegrasikan giroskop canggih. 
+              Sensor ini melacak perubahan orientasi dan kemiringan lereng dengan presisi tinggi. 
+              Data dari giroskop memungkinkan identifikasi adanya deformasi struktural pada tanah atau lereng yang 
+              mungkin tidak terlihat dari pergerakan horizontal saja. Fitur ini memberikan gambaran yang lebih lengkap 
+              tentang dinamika lereng, membantu dalam memprediksi arah dan jenis potensi longsor.
+            </p>
+          </div>
           <div
             className="col-12 col-md-6 col-lg-4"
             style={{ marginTop: "15px" }}
@@ -257,34 +288,17 @@ function HomePage() {
               alt="gambar"
             />
           </div>
-          <div className="col-8">
-            <h3>Penyiraman Air Otomatis</h3>
-            <p>
-              Growbot menawarkan solusi penyiraman otomatis berbasis sensor
-              kelembapan tanah untuk memastikan tanaman mendapatkan jumlah air
-              yang optimal. Dengan teknologi ini, sensor akan memantau tingkat
-              kelembapan tanah secara real-time, dan sistem akan secara otomatis
-              mengaktifkan irigasi saat kadar air di bawah ambang batas yang
-              ditentukan. Fitur ini membantu petani menghemat air, mencegah
-              over-irrigasi, dan menjaga kesehatan tanaman, sehingga menciptakan
-              praktik pertanian yang lebih efisien dan hemat sumber daya.
-            </p>
-          </div>
         </div>
       </div>
       <div className="container-fitur1">
         <div className="row">
           <div className="col-8">
-            <h3>Pengusir Hama Burung</h3>
+            <h3>Transmisi Data Real-time</h3>
             <p>
-              Growbot dilengkapi dengan fitur pengusir hama burung otomatis,
-              menggunakan sensor kamera untuk mendeteksi keberadaan burung di
-              lahan pertanian. Ketika sensor mendeteksi hama burung, sistem akan
-              mengaktifkan mekanisme pengusiran seperti suara atau cahaya untuk
-              menjauhkan burung tanpa membahayakan mereka. Teknologi ini
-              membantu melindungi tanaman dari kerusakan yang disebabkan oleh
-              hama, meningkatkan hasil panen, dan meminimalkan penggunaan metode
-              pengusiran yang berbahaya bagi lingkungan.
+              Inti dari efektivitas TerraSentry adalah kemampuan transmisi data real-time. 
+              Seluruh data yang dikumpulkan dari akselerometer, sensor kelembapan, dan giroskop akan langsung 
+              dikirimkan ke platform pemantauan tanpa penundaan. Sistem ini juga dapat memberikan kesimpulan status tanah jika terdeteksi 
+              ambang batas bahaya atau anomali yang telah ditentukan, memastikan Anda mendapatkan informasi kritis sesegera mungkin.
             </p>
           </div>
           <div

@@ -85,8 +85,23 @@ if (
   conclusion = "🚨 Bencana Sudah Terjadi";
 }
 
+
+
   return (
-    <div className="container" style={{ marginTop: "100px" }}>
+    <div>
+      <div
+        style={{
+          margin: "100px auto 0 auto",
+          textAlign: "center",
+          fontWeight: "bold",
+          fontSize: "1.2rem",
+          color: "#2d3748",
+          letterSpacing: "1px",
+        }}
+      >
+        Kesimpulan: {conclusion}
+      </div>
+    <div className="container" style={{ marginTop: "25px" }}>
       <Row className="g-4 mb-4">
         <Col
           md={6}
@@ -122,18 +137,7 @@ if (
           />
         </Col>
       </Row>
-      <div
-        style={{
-          margin: "0 auto 0 auto",
-          textAlign: "center",
-          fontWeight: "bold",
-          fontSize: "1.2rem",
-          color: "#2d3748",
-          letterSpacing: "1px",
-        }}
-      >
-        Kesimpulan: {conclusion}
-      </div>
+    </div>
     </div>
   );
 }
