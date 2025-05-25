@@ -67,12 +67,12 @@ function HomePage() {
       <div className="container row mt-5">
         <h2 className="text-tech">Teknologi yang digunakan</h2>
         <div
-          className="row mt-5 d-flex justify-content-center gap-4"
+          className="row mt-5 justify-content-center gap-4"
           style={{}}
         >
-          <div className="col-12 col-md-6 col-lg-3">
+          <div className="col-12 col-md-6 col-lg-3 mx-auto mb-4">
             <div
-              class="card d-flex align-items-center shadow mb-5 bg-body rounded"
+              className="card d-flex align-items-center shadow mb-5 bg-body rounded"
               style={{ width: "230px", height: "273px", border: "none" }}
             >
               <img
@@ -98,9 +98,9 @@ function HomePage() {
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-6 col-lg-3">
+          <div className="col-12 col-md-6 col-lg-3 mx-auto mb-4">
             <div
-              class="card d-flex align-items-center shadow mb-5 bg-body rounded"
+              className="card d-flex align-items-center shadow mb-5 bg-body rounded"
               style={{ width: "230px", height: "273px", border: "none" }}
             >
               <img
@@ -126,9 +126,9 @@ function HomePage() {
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-6 col-lg-3">
+          <div className="col-12 col-md-6 col-lg-3 mx-auto mb-4">
             <div
-              class="card d-flex align-items-center shadow mb-5 bg-body rounded"
+              className="card d-flex align-items-center shadow mb-5 bg-body rounded"
               style={{ width: "230px", height: "273px", border: "none" }}
             >
               <img
@@ -154,9 +154,9 @@ function HomePage() {
               </div>
             </div>
           </div>
-          {/* <div className="col-12 col-md-6 col-lg-3">
+          {/* <div className="col-12 col-md-6 col-lg-3 mx-auto mb-4">
             <div
-              class="card d-flex align-items-center shadow mb-5 bg-body rounded"
+              className="card d-flex align-items-center shadow mb-5 bg-body rounded"
               style={{ width: "230px", height: "273px", border: "none" }}
             >
               <img
@@ -183,9 +183,9 @@ function HomePage() {
               </div>
             </div>
           </div> */}
-          <div className="col-12 col-md-6 col-lg-3">
+          <div className="col-12 col-md-6 col-lg-3 mx-auto mb-4">
             <div
-              class="card d-flex align-items-center shadow mb-5 bg-body rounded"
+              className="card d-flex align-items-center shadow mb-5 bg-body rounded"
               style={{ width: "230px", height: "273px", border: "none" }}
             >
               <img

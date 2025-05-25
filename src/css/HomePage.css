@@ -99,6 +99,13 @@
 
 /* Ukuran font untuk layar kecil */
 @media (max-width: 576px) {
+
+  .card {
+    margin-left: 85px;
+    margin-right: auto;
+    float: none;
+    }
+
   .judul {
     font-size: 20px;
   }
