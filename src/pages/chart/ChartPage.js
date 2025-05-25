@@ -73,12 +73,12 @@ const lastKelembapanUdara = chartDataN.datasets[0].data.slice(-1)[0];
 let conclusion = "😊 Keadaan Normal";
 if (
   (lastKelembapanTanah > 40 && lastKelembapanTanah < 60) &&
-  lastKelembapanUdara > 75 &&
+  lastKelembapanUdara > 60 &&
   (lastGiroskop > 5 && lastGiroskop < -5)
 ) {
   conclusion = "⚠️ Keadaan Siaga";
 } else if (
-  lastKelembapanTanah > 60 &&
+  lastKelembapanTanah > 70 &&
   lastGiroskop > 15 &&
   lastKelembapanUdara > 85
 ) {
