@@ -79,7 +79,7 @@ if (
   conclusion = "⚠️ Keadaan Siaga";
 } else if (
   lastKelembapanTanah > 70 &&
-  lastGiroskop > 15 &&
+  (lastGiroskop > 15 || lastGiroskop < -15) &&
   lastKelembapanUdara > 85
 ) {
   conclusion = "🚨 Bencana Sudah Terjadi";
