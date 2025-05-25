@@ -26,10 +26,11 @@ ChartJS.register(
   ChartDataLabels
 );
 
+
 function getStatus(label, value) {
   switch (label) {
     case "Akselerometer / Guncangan":
-      if (value < 10 || value > 10) return "⚠️ Terjadi Guncangan";
+      if (value < 9 || value > 10) return "⚠️ Terjadi Guncangan";
       return "Normal";
     case "Kelembapan Tanah":
       if (value < 30) return "Kering";
