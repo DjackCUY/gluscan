@@ -21,6 +21,7 @@ function App() {
   const [sensorDataAkselerometer, setsensorDataAkselerometer] = useState("");
   const [sensorData2, setSensorData2] = useState("");
   const [sensorData3, setSensorData3] = useState("");
+  const [sensorData4, setSensorData4] = useState("");
   const [sensorDataKelembapanT, setsensorDataKelembapanT] = useState("");
 
   // pengaturan navbar open & close
@@ -45,6 +46,7 @@ function App() {
         "sensor/giroskop",
         "sensor/kelembapanT",
         "sensor/kelembapanU",
+        "sensor/suhu"
       ];
 
       topics.forEach((topic) => {
@@ -69,6 +71,9 @@ function App() {
           break;
         case "sensor/kelembapanU":
           setSensorData3(message.toString());
+          break;
+        case "sensor/suhu":
+          setSensorData4(message.toString());
           break;
         default:
           break;
@@ -149,6 +154,7 @@ function App() {
                 sensorDataAkselerometer={sensorDataAkselerometer}
                 sensorData2={sensorData2}
                 sensorData3={sensorData3}
+                sensorData4={sensorData4}
                 sensorDataKelembapanT={sensorDataKelembapanT}
               />
             }

@@ -6,6 +6,7 @@ function ChartPage({
   sensorDataAkselerometer,
   sensorData2,
   sensorData3,
+  sensorData4,
   sensorDataKelembapanT
 }) {
 
@@ -88,7 +89,18 @@ if (
   conclusion = "🚨 Bencana Sudah Terjadi";
 }
 
+let suhu = sensorData4;
+let emote = "";
 
+if (suhu > 30) {
+  emote = "☀️"; // Panas / Cerah
+} else if (suhu >= 25 && suhu <= 30) {
+  emote = "🌤️"; // Hangat / Cerah Berawan
+} else if (suhu >= 20 && suhu < 25) {
+  emote = "🌥️"; // Sejuk / Cenderung Mendung
+} else {
+  emote = "☁️"; // Dingin / Mendung
+}
 
   return (
     <div>
@@ -103,6 +115,8 @@ if (
         }}
       >
         Kesimpulan: {conclusion}
+        <br></br>
+        Temperatur Udara: {emote + suhu}
       </div>
     <div className="container" style={{ marginTop: "25px" }}>
       <Row className="g-4 mb-4">
