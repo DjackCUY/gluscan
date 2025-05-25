@@ -131,7 +131,7 @@ function App() {
               {/* button download */}
               <div className="d-flex unduh-div">
                 <button className="unduh">
-                  <a href="/apk/GrowBot.apk">Unduh Aplikasi Terrasentry</a>
+                  <a href="/apk/Terrasentry.apk">Unduh Aplikasi Terrasentry</a>
                 </button>
               </div>
             </Nav>
