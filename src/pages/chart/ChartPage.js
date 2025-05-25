@@ -74,7 +74,7 @@ let conclusion = "😊 Keadaan Normal";
 if (
   (lastKelembapanTanah > 40 && lastKelembapanTanah < 60) &&
   lastKelembapanUdara > 60 &&
-  (lastGiroskop > 5 && lastGiroskop < -5)
+  (lastGiroskop > 5 || lastGiroskop < -5)
 ) {
   conclusion = "⚠️ Keadaan Siaga";
 } else if (
