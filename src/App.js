@@ -18,12 +18,10 @@ import "./css/App.css"; // Import the CSS file
 import { Navbar, Nav, Container } from "react-bootstrap";
 
 function App() {
-  const [sensorData1, setSensorData1] = useState("");
+  const [sensorDataAkselerometer, setsensorDataAkselerometer] = useState("");
   const [sensorData2, setSensorData2] = useState("");
   const [sensorData3, setSensorData3] = useState("");
-  const [sensorDataN, setSensorDataN] = useState("");
-  const [sensorDataP, setSensorDataP] = useState("");
-  const [sensorDataK, setSensorDataK] = useState("");
+  const [sensorDataKelembapanT, setsensorDataKelembapanT] = useState("");
 
   // pengaturan navbar open & close
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -32,10 +30,10 @@ function App() {
 
   useEffect(() => {
     const client = mqtt.connect(
-      "wss://growbot-1rwo5b.a02.usw2.aws.hivemq.cloud:8884/mqtt",
+      "wss://9bb714241f0940c98be99b31c2e310ed.s1.eu.hivemq.cloud:8884/mqtt",
       {
-        username: "RADZDuino",
-        password: "Juaragemastik2024",
+        username: "terrasentry",
+        password: "Indrakenz1.",
       }
     );
 
@@ -43,12 +41,10 @@ function App() {
       console.log("Connected to MQTT broker");
 
       const topics = [
-        "sensor/temperature",
-        "sensor/humidity",
-        "sensor/nitrogen",
-        "sensor/phosphorous",
-        "sensor/potassium",
-        "sensor/moisture",
+        "sensor/akselerometer",
+        "sensor/giroskop",
+        "sensor/kelembapanT",
+        "sensor/kelembapanU",
       ];
 
       topics.forEach((topic) => {
@@ -62,22 +58,16 @@ function App() {
 
     client.on("message", (topic, message) => {
       switch (topic) {
-        case "sensor/temperature":
-          setSensorData1(message.toString());
+        case "sensor/akselerometer":
+          setsensorDataAkselerometer(message.toString());
           break;
-        case "sensor/humidity":
+        case "sensor/giroskop":
           setSensorData2(message.toString());
           break;
-        case "sensor/nitrogen":
-          setSensorDataN(message.toString());
+        case "sensor/kelembapanT":
+          setsensorDataKelembapanT(message.toString());
           break;
-        case "sensor/phosphorous":
-          setSensorDataP(message.toString());
-          break;
-        case "sensor/potassium":
-          setSensorDataK(message.toString());
-          break;
-        case "sensor/moisture":
+        case "sensor/kelembapanU":
           setSensorData3(message.toString());
           break;
         default:
@@ -97,13 +87,13 @@ function App() {
           <Navbar.Brand href="/">
             <img
               alt="gambar"
-              src="/images/logo/logoums-text.png"
-              style={{ width: "95px", height: "auto", marginRight: "10px" }}
+              src="/images/favicon.jpg"
+              style={{ width: "50px", height: "auto", marginRight: "10px" }}
             />
             <img
               alt="gambar"
-              src="/images/logo.png"
-              style={{ width: "100px", height: "auto" }}
+              src="/images/terra.png"
+              style={{ width: "150px", height: "auto" }}
             />
           </Navbar.Brand>
           <Navbar.Toggle
@@ -130,34 +120,18 @@ function App() {
               </Nav.Link>
               <Nav.Link
                 as={NavLink}
-                to="/control"
-                className="nav-link"
-                onClick={closeNavbar}
-              >
-                Control Button
-              </Nav.Link>
-              <Nav.Link
-                as={NavLink}
-                to="/stream"
-                className="nav-link"
-                onClick={closeNavbar}
-              >
-                Stream Camera
-              </Nav.Link>
-              <Nav.Link
-                as={NavLink}
                 to="/setting"
                 className="nav-link"
                 onClick={closeNavbar}
               >
-                Setting
+                Settings
               </Nav.Link>
             </Nav>
             <Nav className="ms-auto">
               {/* button download */}
               <div className="d-flex unduh-div">
                 <button className="unduh">
-                  <a href="/apk/GrowBot.apk">Unduh Aplikasi GrowBot</a>
+                  <a href="/apk/GrowBot.apk">Unduh Aplikasi Terrasentry</a>
                 </button>
               </div>
             </Nav>
@@ -172,12 +146,10 @@ function App() {
             path="/chart"
             element={
               <ChartPage
-                sensorData1={sensorData1}
+                sensorDataAkselerometer={sensorDataAkselerometer}
                 sensorData2={sensorData2}
                 sensorData3={sensorData3}
-                sensorDataN={sensorDataN}
-                sensorDataP={sensorDataP}
-                sensorDataK={sensorDataK}
+                sensorDataKelembapanT={sensorDataKelembapanT}
               />
             }
           />

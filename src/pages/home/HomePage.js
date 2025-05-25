@@ -33,24 +33,26 @@ function HomePage() {
               Berbasis IoT
             </h1>
             <h5 className="subjudul">
-              Efisiensi dalam monitoring lahan rawan longsor secara real-time
-              menggunakan perangkat mobile
+              Sistem IoT yang merepresentasikan kemajuan dalam teknologi pemantauan geologi, 
+              berfokus pada optimalisasi efisiensi dalam identifikasi potensi longsor. 
+              Dengan integrasi sensor akselerometer, kelembapan tanah, dan giroskop, 
+              sistem ini menyediakan data real-time mengenai dinamika tanah.
             </h5>
             <Link
               to="/chart"
               className="d-flex justify-content-start mt-2"
               style={{ marginRight: "90px", textDecoration: "none" }}
             >
-              <CustomButton label="Monitoring Sensor" />
+              <CustomButton label="Grafik Monitoring" />
             </Link>
           </div>
           <div
             className="col-12 col-md-6 col-lg-4"
-            style={{ marginTop: "15px" }}
+            style={{ marginTop: "20px" }}
           >
             <img
-              src="images/farming.webp"
-              alt="gambar"
+              src="images/tanah-m.jpg"
+              alt="gambar-monitoring-tanah"
               style={{
                 width: "100%",
                 maxWidth: "400px",
@@ -61,7 +63,7 @@ function HomePage() {
           </div>
         </div>
       </div>
-      <hr style={{ marginTop: "100px" }}></hr>
+      <hr style={{ marginTop: "25px" }}></hr>
       <div className="container row mt-5">
         <h2 className="text-tech">Teknologi yang digunakan</h2>
         <div
@@ -74,7 +76,7 @@ function HomePage() {
               style={{ width: "230px", height: "273px", border: "none" }}
             >
               <img
-                src="/images/DHT.jpg"
+                src="/images/mpu-sensor.jpg"
                 class="card-img"
                 alt="dht22"
                 style={{
@@ -85,14 +87,13 @@ function HomePage() {
                 }}
               />
               <div class="card-body">
-                <p className="tech">Sensor DHT22</p>
+                <p className="tech">Sensor Akselerometer</p>
                 <p
-                  class="card-text text-center b-tech"
+                  class="deskripsi-kartu-tech"
                   style={{ fontSize: "13px" }}
                 >
-                  Memantau kondisi udara dengan akurat, termasuk suhu dan
-                  kelembapan, sehingga petani dapat memahami keadaan lingkungan
-                  dan menyesuaikan tindakan yang tepat.
+                  Sensor akselerometer berguna untuk mendeteksi gempa dengan mengukur percepatan 
+                  getaran tanah secara real-time pada tiga sumbu.
                 </p>
               </div>
             </div>
@@ -103,7 +104,7 @@ function HomePage() {
               style={{ width: "230px", height: "273px", border: "none" }}
             >
               <img
-                src="/images/Soil.jpeg"
+                src="/images/soil-sensor.webp"
                 class="card-img"
                 alt="soil"
                 style={{
@@ -114,14 +115,13 @@ function HomePage() {
                 }}
               />
               <div class="card-body">
-                <p className="tech">Soil Moisture</p>
+                <p className="tech">Sensor Soil Moisture</p>
                 <p
-                  class="card-text text-center b-tech"
+                  class="deskripsi-kartu-tech"
                   style={{ fontSize: "13px" }}
                 >
                   Mengukur tingkat kelembapan tanah secara real-time, membantu
-                  petani dalam menjaga irigasi yang optimal dan menghindari
-                  kekeringan atau kelebihan air.
+                  mendeteksi potensi longsor yang disebabkan kadar air yang berlebih.
                 </p>
               </div>
             </div>
@@ -132,7 +132,7 @@ function HomePage() {
               style={{ width: "230px", height: "273px", border: "none" }}
             >
               <img
-                src="/images/NPK.jpg"
+                src="/images/DHT.jpg"
                 class="card-img"
                 alt="npk"
                 style={{
@@ -143,14 +143,13 @@ function HomePage() {
                 }}
               />
               <div class="card-body">
-                <p className="tech">Sensor NPK</p>
+                <p className="tech">Sensor DHT-22</p>
                 <p
-                  class="card-text text-center b-tech"
-                  style={{ fontSize: "13px" }}
+                  class="deskripsi-kartu-tech"
+                  style={{ fontSize: "13px", textAlign: "justify"}}
                 >
-                  Mendeteksi kadar Nitrogen, Fosfor, dan Kalium dalam tanah,
-                  memberikan data yang penting untuk menjaga kesuburan tanah dan
-                  meningkatkan hasil panen.
+                  Mengukur suhu dan kelembapan udara. Kelembapan udara yang tinggi dan perubahan suhu 
+                  dapat menjadi indikator awal kondisi tanah yang mulai jenuh air, yang meningkatkan risiko longsor. 
                 </p>
               </div>
             </div>
@@ -174,7 +173,7 @@ function HomePage() {
               <div class="card-body">
                 <p className="tech">Sensor Kamera</p>
                 <p
-                  class="card-text text-center b-tech"
+                  class="deskripsi-kartu-tech"
                   style={{ fontSize: "13px" }}
                 >
                   Mendeteksi keberadaan burung menggunakan kamera dan opencv
@@ -203,7 +202,7 @@ function HomePage() {
               <div class="card-body">
                 <p className="tech">Mikrokontroler ESP32</p>
                 <p
-                  class="card-text text-center b-tech"
+                  class="deskripsi-kartu-tech"
                   style={{ fontSize: "13px" }}
                 >
                   Mikrokontroler utama yang bertugas sebagai otak dari semua

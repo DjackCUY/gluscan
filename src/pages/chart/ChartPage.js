@@ -3,12 +3,10 @@ import { Row, Col } from "react-bootstrap";
 import SensorChart from "../../SensorChart"; // Import komponen SensorChart
 
 function ChartPage({
-  sensorData1,
+  sensorDataAkselerometer,
   sensorData2,
   sensorData3,
-  sensorDataN,
-  sensorDataP,
-  sensorDataK,
+  sensorDataKelembapanT
 }) {
   const createChartData = (label, borderColor) => ({
     labels: [],
@@ -23,22 +21,16 @@ function ChartPage({
   });
 
   const [chartData1, setChartData1] = useState(
-    createChartData("Temperature", "rgba(255, 0, 0,1)")
+    createChartData("Akselerometer / Guncangan", "rgba(255, 0, 0,1)")
   );
   const [chartData2, setChartData2] = useState(
-    createChartData("Humidity", "rgba(15, 255, 3,1)")
+    createChartData("Giroskop", "rgba(15, 255, 3,1)")
   );
   const [chartData3, setChartData3] = useState(
-    createChartData("Soil Moisture", "rgba(138, 69, 0)")
+    createChartData("Kelembapan Tanah", "rgba(138, 69, 0)")
   );
   const [chartDataN, setChartDataN] = useState(
-    createChartData("Nitrogen", "rgba(255, 247, 0)")
-  );
-  const [chartDataP, setChartDataP] = useState(
-    createChartData("Phosphorous", "rgba(255, 247, 0)")
-  );
-  const [chartDataK, setChartDataK] = useState(
-    createChartData("Potassium", "rgba(255, 247, 0)")
+    createChartData("Kelembapan Udara", "rgba(255, 247, 0)")
   );
 
   const updateChart = (sensorData, setChartData) => {
@@ -60,19 +52,15 @@ function ChartPage({
   };
 
   useEffect(() => {
-    if (sensorData1) updateChart(sensorData1, setChartData1);
-    if (sensorData2) updateChart(sensorData2, setChartData2);
-    if (sensorData3) updateChart(sensorData3, setChartData3);
-    if (sensorDataN) updateChart(sensorDataN, setChartDataN);
-    if (sensorDataP) updateChart(sensorDataP, setChartDataP);
-    if (sensorDataK) updateChart(sensorDataK, setChartDataK);
+    if (sensorDataAkselerometer) updateChart(sensorDataAkselerometer, setChartData1);
+    if (sensorDataKelembapanT) updateChart(sensorDataKelembapanT, setChartData2);
+    if (sensorData2) updateChart(sensorData2, setChartData3);
+    if (sensorData3) updateChart(sensorData3, setChartDataN);
   }, [
-    sensorData1,
+    sensorDataAkselerometer,
+    sensorDataKelembapanT,
     sensorData2,
-    sensorData3,
-    sensorDataN,
-    sensorDataP,
-    sensorDataK,
+    sensorData3
   ]);
 
   return (
@@ -85,44 +73,30 @@ function ChartPage({
           }}
         >
           <SensorChart
-            label="Temperature"
+            label="Akselerometer / Guncangan"
             data={chartData1}
             borderColor="rgba(255, 0, 0, 1)"
           />
         </Col>
         <Col md={6}>
           <SensorChart
-            label="Humidity"
+            label="Kelembapan Tanah"
             data={chartData2}
-            borderColor="rgba(15, 255, 3,1)"
-          />
-        </Col>
-        <Col md={6}>
-          <SensorChart
-            label="Soil Moisture"
-            data={chartData3}
             borderColor="rgba(138, 69, 0)"
           />
         </Col>
         <Col md={6}>
           <SensorChart
-            label="Nitrogen"
+            label="Giroskop"
+            data={chartData3}
+            borderColor="rgba(15, 255, 3,1)"
+          />
+        </Col>
+        <Col md={6}>
+          <SensorChart
+            label="Kelembapan Udara"
             data={chartDataN}
-            borderColor="rgba(255, 247, 0)"
-          />
-        </Col>
-        <Col md={6}>
-          <SensorChart
-            label="Phosphorous"
-            data={chartDataP}
-            borderColor="rgba(255, 247, 0)"
-          />
-        </Col>
-        <Col md={6}>
-          <SensorChart
-            label="Potassium"
-            data={chartDataK}
-            borderColor="rgba(255, 247, 0)"
+            borderColor="rgba(56, 56, 255)"
           />
         </Col>
       </Row>

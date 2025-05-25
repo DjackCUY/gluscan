@@ -25,10 +25,10 @@ function SettingPage() {
 
   useEffect(() => {
     const mqttClient = mqtt.connect(
-      "wss://growbot-1rwo5b.a02.usw2.aws.hivemq.cloud:8884/mqtt",
+      "wss://9bb714241f0940c98be99b31c2e310ed.s1.eu.hivemq.cloud:8884/mqtt",
       {
-        username: "RADZDuino",
-        password: "Juaragemastik2024",
+        username: "terrasentry",
+        password: "Indrakenz1.",
       }
     );
 
@@ -85,12 +85,12 @@ function SettingPage() {
   return (
     <div className="settings-container">
       <h1 className="settings-title text-center">
-        Penyesuaian Kelembaban Tanah
+        Penyesuaian Sensitifitas Sensor
       </h1>
       <div className="settings-container2 row">
         <div className="settings-form col-6">
           <label htmlFor="plantType" className="form-label">
-            Pilih Tanaman :
+            Pilih Jenis Sensor :
           </label>
           <select
             id="plantType"
@@ -98,23 +98,15 @@ function SettingPage() {
             onChange={handlePlantTypeChange}
             className="form-select"
           >
-            <option value="Tomat">Tomat</option>
-            <option value="Padi">Padi</option>
-            <option value="Jagung">Jagung</option>
-            <option value="Kopi">Kopi</option>
-            <option value="Tebu">Tebu</option>
-            <option value="Cabai">Cabai</option>
-            <option value="Sayuran Daun">Sayuran Daun</option>
-            <option value="Kentang">Kentang</option>
-            <option value="Tembakau">Tembakau</option>
-            <option value="Kacang-kacangan">Kacang-kacangan</option>
-            <option value="Terong">Terong</option>
-            <option value="Kedelai">Kedelai</option>
+            <option value="akse">Akselerometer</option>
+            <option value="giro">Giroskop</option>
+            <option value="kelemT">Kelembapan Tanah</option>
+            <option value="kelemU">Kelembapan Udara</option>
             {/* Tambahkan lebih banyak jenis tanaman jika diperlukan */}
           </select>
 
           <label htmlFor="moistureThreshold" className="form-label">
-            Moisture Threshold (%):
+            Threshold / Batasan:
           </label>
           <input
             id="moistureThreshold"
@@ -131,8 +123,8 @@ function SettingPage() {
           </button>
           {errorMessage && <div className="error-message">{errorMessage}</div>}
         </div>
-        <div className="information col-6">
-          <p className="info-kelembaban">Kelembaban Ideal</p>
+        {/* <div className="information col-6">
+          <p className="info-kelembaban">Klasifikasi</p>
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingOne">
@@ -234,7 +226,7 @@ function SettingPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

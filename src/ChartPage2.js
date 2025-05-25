@@ -25,7 +25,7 @@ function ChartPage({
     labels: [],
     datasets: [
       {
-        label: "Sensor Temperature",
+        label: "Akselerometer",
         data: [],
         fill: false,
         borderColor: "rgba(75,192,192,1)",
@@ -37,7 +37,7 @@ function ChartPage({
     labels: [],
     datasets: [
       {
-        label: "Sensor Humidity",
+        label: "Giroskop",
         data: [],
         fill: false,
         borderColor: "rgba(244,180,0,1)",
@@ -49,7 +49,7 @@ function ChartPage({
     labels: [],
     datasets: [
       {
-        label: "Sensor Soil Moisturize",
+        label: "Kelembapan Tanah",
         data: [],
         fill: false,
         borderColor: "rgba(192,75,75,1)",
