@@ -35,7 +35,10 @@ function ChartPage({
   );
 
   const updateChart = (sensorData, setChartData) => {
-    const currentTime = new Date().toLocaleTimeString();
+      const currentTime = new Date().toLocaleTimeString("id-ID", {
+    hour12: false,
+    timeZone: "Asia/Jakarta"
+  });
     setChartData((prevState) => {
       const newLabels = [...prevState.labels, currentTime];
       const newData = [...prevState.datasets[0].data, parseFloat(sensorData)];
