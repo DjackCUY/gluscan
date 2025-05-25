@@ -154,7 +154,7 @@ function HomePage() {
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-6 col-lg-3">
+          {/* <div className="col-12 col-md-6 col-lg-3">
             <div
               class="card d-flex align-items-center shadow mb-5 bg-body rounded"
               style={{ width: "230px", height: "273px", border: "none" }}
@@ -182,7 +182,7 @@ function HomePage() {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="col-12 col-md-6 col-lg-3">
             <div
               class="card d-flex align-items-center shadow mb-5 bg-body rounded"

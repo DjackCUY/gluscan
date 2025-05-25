@@ -8,6 +8,7 @@ function ChartPage({
   sensorData3,
   sensorDataKelembapanT
 }) {
+
   const createChartData = (label, borderColor) => ({
     labels: [],
     datasets: [
@@ -63,6 +64,27 @@ function ChartPage({
     sensorData3
   ]);
 
+// Ambil nilai terakhir dari setiap chart
+const lastKelembapanTanah = chartData2.datasets[0].data.slice(-1)[0];
+const lastGiroskop = chartData3.datasets[0].data.slice(-1)[0];
+const lastKelembapanUdara = chartDataN.datasets[0].data.slice(-1)[0];
+
+// Contoh logika kesimpulan berbasis angka
+let conclusion = "😊 Keadaan Normal";
+if (
+  (lastKelembapanTanah > 40 && lastKelembapanTanah < 60) &&
+  lastKelembapanUdara > 85 &&
+  (lastGiroskop > 5 && lastGiroskop < 15)
+) {
+  conclusion = "⚠️ Keadaan Siaga";
+} else if (
+  lastKelembapanTanah > 60 &&
+  lastGiroskop > 15 &&
+  lastKelembapanUdara > 85
+) {
+  conclusion = "🚨 Bencana Sudah Terjadi";
+}
+
   return (
     <div className="container" style={{ marginTop: "100px" }}>
       <Row className="g-4 mb-4">
@@ -100,6 +122,18 @@ function ChartPage({
           />
         </Col>
       </Row>
+      <div
+        style={{
+          margin: "0 auto 0 auto",
+          textAlign: "center",
+          fontWeight: "bold",
+          fontSize: "1.2rem",
+          color: "#2d3748",
+          letterSpacing: "1px",
+        }}
+      >
+        Kesimpulan: {conclusion}
+      </div>
     </div>
   );
 }

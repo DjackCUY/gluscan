@@ -10,6 +10,7 @@
 
 .navbar-custom .nav-link {
   color: white;
+  font-weight: 650;
 }
 
 .navbar-custom .nav-link.active {

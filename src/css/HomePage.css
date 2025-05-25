@@ -115,8 +115,8 @@
   .button-monitoring {
     display: inline-block;
     padding: 5px 10px;
-    background-color: #28a745;
-    border-radius: 10px;
+    background-color: #075235;
+    border-radius: 5px;
     color: #fff;
     cursor: pointer;
     text-align: center;
@@ -124,10 +124,10 @@
     font-weight: bold;
     font-size: 8px;
     text-decoration: none;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
   .judul-tech {
