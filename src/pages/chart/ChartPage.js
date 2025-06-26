@@ -73,33 +73,32 @@ const lastKelembapanTanah = chartData2.datasets[0].data.slice(-1)[0];
 const lastGiroskop = chartData3.datasets[0].data.slice(-1)[0];
 const lastKelembapanUdara = chartDataN.datasets[0].data.slice(-1)[0];
 
-// Contoh logika kesimpulan berbasis angka
 let conclusion = "😊 Keadaan Normal";
 if (
-  (lastKelembapanTanah > 40 && lastKelembapanTanah < 60) &&
-  lastKelembapanUdara > 60 &&
-  (lastGiroskop > 5 || lastGiroskop < -5)
-) {
-  conclusion = "⚠️ Keadaan Siaga";
-} else if (
   lastKelembapanTanah > 70 &&
   (lastGiroskop > 15 || lastGiroskop < -15) &&
   lastKelembapanUdara > 85
 ) {
   conclusion = "🚨 Bencana Sudah Terjadi";
+} else if (
+  (lastKelembapanTanah > 40 && lastKelembapanTanah < 60) &&
+  lastKelembapanUdara > 60 &&
+  (lastGiroskop > 5 || lastGiroskop < -5)
+) {
+  conclusion = "⚠️ Keadaan Siaga";
 }
 
 let suhu = sensorData4;
 let emote = "";
 
 if (suhu > 30) {
-  emote = "☀️"; // Panas / Cerah
+  emote = "☀️";
 } else if (suhu >= 25 && suhu <= 30) {
-  emote = "🌤️"; // Hangat / Cerah Berawan
+  emote = "🌤️";
 } else if (suhu >= 20 && suhu < 25) {
-  emote = "🌥️"; // Sejuk / Cenderung Mendung
+  emote = "🌥️";
 } else {
-  emote = "☁️"; // Dingin / Mendung
+  emote = "☁️";
 }
 
   return (
