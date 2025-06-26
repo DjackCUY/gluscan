@@ -8,14 +8,11 @@ import {
 } from "react-router-dom";
 import HomePage from "./pages/home/HomePage";
 import ChartPage from "./pages/chart/ChartPage";
-import ControlButton from "./pages/control/ControlButton";
 import SettingPage from "./pages/setting/SettingPage";
 import MapPage from "./pages/map/mapPage";
-import StreamPage from "./pages/stream/StreamPage";
-// import LoginPage from "./pages/login/LoginPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "./css/App.css"; // Import the CSS file
+import "./css/App.css";
 import { Navbar, Nav, Container } from "react-bootstrap";
 
 function App() {
@@ -168,8 +165,6 @@ function App() {
               />
             }
           />
-          <Route path="/control" element={<ControlButton />} />
-          <Route path="/stream" element={<StreamPage />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/setting" element={<SettingPage />} />
         </Routes>

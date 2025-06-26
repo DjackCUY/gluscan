@@ -49,9 +49,6 @@ useEffect(() => {
 
     return (
     <div className="map-page-container">
-        <div className="map-title">
-        <h2>Peta Lokasi Terrasentry</h2>
-    </div>
     <div className="map-card">
         <MapContainer
         center={[-2.5489, 118.0149]}
