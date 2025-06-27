@@ -23,15 +23,17 @@ function SettingPage() {
   };
 
   // Load threshold dari localStorage atau pakai default
-const [threshold, setThreshold] = useState(() => {
-  try {
-    const saved = localStorage.getItem("terra_threshold");
-    return saved ? JSON.parse(saved) : defaultThreshold;
-  } catch (e) {
-    console.error("Failed to parse localStorage threshold:", e);
-    return defaultThreshold;
-  }
-});
+  const [threshold, setThreshold] = useState(() => {
+    try {
+      const saved = localStorage.getItem("terra_threshold");
+      return saved ? JSON.parse(saved) : defaultThreshold;
+    } catch (e) {
+      console.error("Failed to parse localStorage threshold:", e);
+      return defaultThreshold;
+    }
+  });
+
+  const [showPopup, setShowPopup] = useState(false);
 
   // Handler input
   const handleChange = (section, key, value) => {
@@ -47,11 +49,27 @@ const [threshold, setThreshold] = useState(() => {
   // Simpan ke localStorage
   const handleSave = () => {
     localStorage.setItem("terra_threshold", JSON.stringify(threshold));
-    alert("Threshold berhasil disimpan!");
+    setShowPopup(true);
+    setTimeout(() => setShowPopup(false), 2000); // popup hilang otomatis 2 detik
   };
 
   return (
     <div className="settings-container">
+      {/* Popup */}
+      {showPopup && (
+        <div className="popup-success">
+          <div className="popup-content">
+            <span className="checkmark">
+              <svg width="48" height="48" viewBox="0 0 48 48">
+                <circle className="circle" cx="24" cy="24" r="22" fill="#e6f9ed" stroke="#34c759" strokeWidth="4"/>
+                <polyline className="tick" points="14,26 22,34 34,18" fill="none" stroke="#34c759" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+            <div className="popup-text">Threshold berhasil disimpan!</div>
+          </div>
+        </div>
+      )}
+
       <h1 className="settings-title text-center">
         Penyesuaian Threshold Kesimpulan & Emote Suhu
       </h1>
@@ -61,7 +79,7 @@ const [threshold, setThreshold] = useState(() => {
           <label>Tanah Bahaya (&gt;):</label>
           <input type="number" value={threshold.conclusion.tanah_bahaya}
             onChange={e => handleChange("conclusion", "tanah_bahaya", e.target.value)} className="form-control" />
-          <label>Giroskop Bahaya (|giro| &gt;):</label>
+          <label>Giroskop Bahaya (&gt;):</label>
           <input type="number" value={threshold.conclusion.giro_bahaya}
             onChange={e => handleChange("conclusion", "giro_bahaya", e.target.value)} className="form-control" />
           <label>Udara Bahaya (&gt;):</label>
@@ -76,7 +94,7 @@ const [threshold, setThreshold] = useState(() => {
           <label>Udara Siaga (&gt;):</label>
           <input type="number" value={threshold.conclusion.udara_siaga}
             onChange={e => handleChange("conclusion", "udara_siaga", e.target.value)} className="form-control" />
-          <label>Giroskop Siaga (|giro| &gt;):</label>
+          <label>Giroskop Siaga (&gt;):</label>
           <input type="number" value={threshold.conclusion.giro_siaga}
             onChange={e => handleChange("conclusion", "giro_siaga", e.target.value)} className="form-control" />
 
