@@ -16,7 +16,7 @@ import "./css/App.css";
 import { Navbar, Nav, Container } from "react-bootstrap";
 
 const MQTT_BROKER = "wss://9bb714241f0940c98be99b31c2e310ed.s1.eu.hivemq.cloud:8884/mqtt";
-const NODE_TOPICS = ["TERRA-1"]; // ganti sesuai topik device Anda
+const NODE_TOPICS = ["TERRA-1", "TERRA-2", "TERRA-3"]; // ganti sesuai topik device Anda
 
 function App() {
   const [sensorDataNodes, setSensorDataNodes] = useState({});
