@@ -64,20 +64,27 @@ function HomePage() {
         </div>
       </div>
       <hr style={{ marginTop: "25px" }}></hr>
-      <div className="container row mt-5">
-        <h2 className="text-tech">Teknologi yang digunakan</h2>
-        <div
-          className="row mt-5 justify-content-center gap-4"
-          style={{}}
-        >
-          <div className="col-12 col-md-6 col-lg-3 mx-auto mb-4">
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-12">
+            <h2 className="text-tech">Teknologi yang digunakan</h2>
+          </div>
+        </div>
+        <div className="row mt-5 justify-content-center">
+          {/* Card 1 - Sensor Akselerometer */}
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
             <div
               className="card d-flex align-items-center shadow mb-5 bg-body rounded"
-              style={{ width: "230px", height: "273px", border: "none" }}
+              style={{ 
+                width: "100%", 
+                maxWidth: "230px", 
+                height: "273px", 
+                border: "none" 
+              }}
             >
               <img
                 src="/images/mpu-sensor.jpg"
-                class="card-img"
+                className="card-img"
                 alt="dht22"
                 style={{
                   width: "90px",
@@ -86,10 +93,10 @@ function HomePage() {
                   borderRadius: "0",
                 }}
               />
-              <div class="card-body">
+              <div className="card-body">
                 <p className="tech">Sensor Akselerometer</p>
                 <p
-                  class="deskripsi-kartu-tech"
+                  className="deskripsi-kartu-tech"
                   style={{ fontSize: "13px" }}
                 >
                   Sensor akselerometer berguna untuk mendeteksi gempa dengan mengukur percepatan 
@@ -98,14 +105,21 @@ function HomePage() {
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-6 col-lg-3 mx-auto mb-4">
+
+          {/* Card 2 - Sensor Soil Moisture */}
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
             <div
               className="card d-flex align-items-center shadow mb-5 bg-body rounded"
-              style={{ width: "230px", height: "273px", border: "none" }}
+              style={{ 
+                width: "100%", 
+                maxWidth: "230px", 
+                height: "273px", 
+                border: "none" 
+              }}
             >
               <img
                 src="/images/soil-sensor.webp"
-                class="card-img"
+                className="card-img"
                 alt="soil"
                 style={{
                   width: "90px",
@@ -114,10 +128,10 @@ function HomePage() {
                   borderRadius: "0",
                 }}
               />
-              <div class="card-body">
+              <div className="card-body">
                 <p className="tech">Sensor Soil Moisture</p>
                 <p
-                  class="deskripsi-kartu-tech"
+                  className="deskripsi-kartu-tech"
                   style={{ fontSize: "13px" }}
                 >
                   Mengukur tingkat kelembapan tanah secara real-time, membantu
@@ -126,14 +140,21 @@ function HomePage() {
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-6 col-lg-3 mx-auto mb-4">
+
+          {/* Card 3 - Sensor DHT-22 */}
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
             <div
               className="card d-flex align-items-center shadow mb-5 bg-body rounded"
-              style={{ width: "230px", height: "273px", border: "none" }}
+              style={{ 
+                width: "100%", 
+                maxWidth: "230px", 
+                height: "273px", 
+                border: "none" 
+              }}
             >
               <img
                 src="/images/DHT.jpg"
-                class="card-img"
+                className="card-img"
                 alt="npk"
                 style={{
                   width: "90px",
@@ -142,10 +163,10 @@ function HomePage() {
                   borderRadius: "0",
                 }}
               />
-              <div class="card-body">
+              <div className="card-body">
                 <p className="tech">Sensor DHT-22</p>
                 <p
-                  class="deskripsi-kartu-tech"
+                  className="deskripsi-kartu-tech"
                   style={{ fontSize: "13px", textAlign: "justify"}}
                 >
                   Mengukur suhu dan kelembapan udara. Kelembapan udara yang tinggi dan perubahan suhu 
@@ -154,43 +175,21 @@ function HomePage() {
               </div>
             </div>
           </div>
-          {/* <div className="col-12 col-md-6 col-lg-3 mx-auto mb-4">
+
+          {/* Card 4 - Mikrokontroler ESP32 */}
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
             <div
               className="card d-flex align-items-center shadow mb-5 bg-body rounded"
-              style={{ width: "230px", height: "273px", border: "none" }}
-            >
-              <img
-                src="/images/espcam.jpg"
-                class="card-img"
-                alt="espcam"
-                style={{
-                  width: "90PX",
-                  height: "auto",
-                  marginTop: "10px",
-                  borderRadius: "0",
-                }}
-              />
-              <div class="card-body">
-                <p className="tech">Sensor Kamera</p>
-                <p
-                  class="deskripsi-kartu-tech"
-                  style={{ fontSize: "13px" }}
-                >
-                  Mendeteksi keberadaan burung menggunakan kamera dan opencv
-                  serta YOLOv8, untuk mencegah gagal panen karena serangan hama
-                  burung.
-                </p>
-              </div>
-            </div>
-          </div> */}
-          <div className="col-12 col-md-6 col-lg-3 mx-auto mb-4">
-            <div
-              className="card d-flex align-items-center shadow mb-5 bg-body rounded"
-              style={{ width: "230px", height: "273px", border: "none" }}
+              style={{ 
+                width: "100%", 
+                maxWidth: "230px", 
+                height: "273px", 
+                border: "none" 
+              }}
             >
               <img
                 src="/images/ESP32.jpg"
-                class="card-img"
+                className="card-img"
                 alt="esp32"
                 style={{
                   width: "90px",
@@ -199,15 +198,48 @@ function HomePage() {
                   borderRadius: "0",
                 }}
               />
-              <div class="card-body">
+              <div className="card-body">
                 <p className="tech">Mikrokontroler ESP32</p>
                 <p
-                  class="deskripsi-kartu-tech"
+                  className="deskripsi-kartu-tech"
                   style={{ fontSize: "13px" }}
                 >
                   Mikrokontroler utama yang bertugas sebagai otak dari semua
                   tugas yang ada, berfungsi sebagai penghubung antara
                   komponen, web, dan user dengan MQTT.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
+            <div
+              className="card d-flex align-items-center shadow mb-5 bg-body rounded"
+              style={{ 
+                width: "100%", 
+                maxWidth: "230px", 
+                height: "273px", 
+                border: "none" 
+              }}
+            >
+              <img
+                src="/images/neo.png"
+                className="card-img"
+                alt="Neo-6M"
+                style={{
+                  width: "90px",
+                  height: "auto",
+                  marginTop: "10px",
+                  borderRadius: "0",
+                }}
+              />
+              <div className="card-body">
+                <p className="tech">GPS Neo-6M</p>
+                <p
+                  className="deskripsi-kartu-tech"
+                  style={{ fontSize: "13px" }}
+                >
+                  Modul GPS untuk mendapatkan koordinat akurat dimana alat dipasang sehingga pengguna dapat melakukan tracking
+                  melalui peta dan memantau kondisi alat secara real-time.
                 </p>
               </div>
             </div>
