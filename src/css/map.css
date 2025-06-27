@@ -30,6 +30,10 @@
     border: 2px solid rgba(7, 82, 53, 0.1);
 }
 
+.marker-green img, .marker-green svg { filter: hue-rotate(90deg) saturate(2); }
+.marker-yellow img, .marker-yellow svg { filter: hue-rotate(45deg) saturate(4) brightness(1.5); }
+.marker-red img, .marker-red svg { filter: hue-rotate(-50deg) saturate(4) brightness(1.2); }
+
 @media (max-width: 600px) {
     .map-card {
         padding: 10px;

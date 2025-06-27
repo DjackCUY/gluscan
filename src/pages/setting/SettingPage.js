@@ -1,232 +1,101 @@
-import React, { useState, useEffect } from "react";
-import mqtt from "mqtt";
+import React, { useState } from "react";
 import "../../css/SettingPage.css";
 
 function SettingPage() {
-  const [plantType, setPlantType] = useState("Tomato");
-  const [moistureThreshold, setMoistureThreshold] = useState(50);
-  const [client, setClient] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const plantMoistureMapping = {
-    Tomat: 40,
-    Padi: 50,
-    Jagung: 35,
-    Kedelai: 30,
-    Kopi: 45,
-    Tebu: 50,
-    Cabai: 45,
-    "Sayuran Daun": 50,
-    Kentang: 40,
-    Tembakau: 30,
-    "Kacang-kacangan": 35,
-    Terong: 40,
+  // Default threshold
+  const defaultThreshold = {
+    conclusion: {
+      tanah_bahaya: 70,
+      giro_bahaya: 15,
+      udara_bahaya: 85,
+      tanah_siaga_min: 40,
+      tanah_siaga_max: 60,
+      udara_siaga: 60,
+      giro_siaga: 5,
+    },
+    emote: {
+      panas: 30,
+      cerah_min: 25,
+      cerah_max: 30,
+      mendung_min: 20,
+      mendung_max: 25,
+    },
   };
 
-  useEffect(() => {
-    const mqttClient = mqtt.connect(
-      "wss://9bb714241f0940c98be99b31c2e310ed.s1.eu.hivemq.cloud:8884/mqtt",
-      {
-        username: "terrasentry",
-        password: "Indrakenz1.",
-      }
-    );
+  // Load threshold dari localStorage atau pakai default
+  const [threshold, setThreshold] = useState(() => {
+    const saved = localStorage.getItem("terra_threshold");
+    return saved ? JSON.parse(saved) : defaultThreshold;
+  });
 
-    mqttClient.on("connect", () => {
-      console.log("Connected to MQTT broker");
-      setErrorMessage(""); // Reset error ketika terhubung
-    });
-
-    mqttClient.on("error", (err) => {
-      console.error("Connection error:", err);
-      setErrorMessage("Failed to connect to MQTT broker");
-    });
-
-    setClient(mqttClient);
-
-    return () => {
-      mqttClient.end();
-    };
-  }, []);
-
-  const handlePlantTypeChange = (event) => {
-    const selectedPlant = event.target.value;
-    setPlantType(selectedPlant);
-
-    if (plantMoistureMapping[selectedPlant]) {
-      setMoistureThreshold(plantMoistureMapping[selectedPlant]);
-    }
+  // Handler input
+  const handleChange = (section, key, value) => {
+    setThreshold((prev) => ({
+      ...prev,
+      [section]: {
+        ...prev[section],
+        [key]: Number(value),
+      },
+    }));
   };
 
-  const handleMoistureThresholdChange = (event) => {
-    setMoistureThreshold(event.target.value);
-  };
-
+  // Simpan ke localStorage
   const handleSave = () => {
-    if (client && client.connected) {
-      console.log(`Moisture Threshold: ${moistureThreshold}`);
-
-      // Publish moistureThreshold value to the topic
-      client.publish("data/soil", moistureThreshold.toString(), (err) => {
-        if (err) {
-          console.error("Failed to send data:", err);
-          setErrorMessage("Failed to send data to MQTT broker");
-        } else {
-          console.log("Data sent to MQTT broker:", moistureThreshold);
-          setErrorMessage(""); // Reset error message jika berhasil
-        }
-      });
-    } else {
-      console.error("MQTT client is not connected");
-      setErrorMessage("MQTT client is not connected");
-    }
+    localStorage.setItem("terra_threshold", JSON.stringify(threshold));
+    alert("Threshold berhasil disimpan!");
   };
 
   return (
     <div className="settings-container">
       <h1 className="settings-title text-center">
-        Penyesuaian Sensitifitas Sensor
+        Penyesuaian Threshold Kesimpulan & Emote Suhu
       </h1>
       <div className="settings-container2 row">
         <div className="settings-form col-6">
-          <label htmlFor="plantType" className="form-label">
-            Pilih Jenis Sensor :
-          </label>
-          <select
-            id="plantType"
-            value={plantType}
-            onChange={handlePlantTypeChange}
-            className="form-select"
-          >
-            <option value="akse">Akselerometer</option>
-            <option value="giro">Giroskop</option>
-            <option value="kelemT">Kelembapan Tanah</option>
-            <option value="kelemU">Kelembapan Udara</option>
-            {/* Tambahkan lebih banyak jenis tanaman jika diperlukan */}
-          </select>
+          <h5>Threshold Kesimpulan</h5>
+          <label>Tanah Bahaya (&gt;):</label>
+          <input type="number" value={threshold.conclusion.tanah_bahaya}
+            onChange={e => handleChange("conclusion", "tanah_bahaya", e.target.value)} className="form-control" />
+          <label>Giroskop Bahaya (|giro| &gt;):</label>
+          <input type="number" value={threshold.conclusion.giro_bahaya}
+            onChange={e => handleChange("conclusion", "giro_bahaya", e.target.value)} className="form-control" />
+          <label>Udara Bahaya (&gt;):</label>
+          <input type="number" value={threshold.conclusion.udara_bahaya}
+            onChange={e => handleChange("conclusion", "udara_bahaya", e.target.value)} className="form-control" />
+          <label>Tanah Siaga (min):</label>
+          <input type="number" value={threshold.conclusion.tanah_siaga_min}
+            onChange={e => handleChange("conclusion", "tanah_siaga_min", e.target.value)} className="form-control" />
+          <label>Tanah Siaga (max):</label>
+          <input type="number" value={threshold.conclusion.tanah_siaga_max}
+            onChange={e => handleChange("conclusion", "tanah_siaga_max", e.target.value)} className="form-control" />
+          <label>Udara Siaga (&gt;):</label>
+          <input type="number" value={threshold.conclusion.udara_siaga}
+            onChange={e => handleChange("conclusion", "udara_siaga", e.target.value)} className="form-control" />
+          <label>Giroskop Siaga (|giro| &gt;):</label>
+          <input type="number" value={threshold.conclusion.giro_siaga}
+            onChange={e => handleChange("conclusion", "giro_siaga", e.target.value)} className="form-control" />
 
-          <label htmlFor="moistureThreshold" className="form-label">
-            Threshold / Batasan:
-          </label>
-          <input
-            id="moistureThreshold"
-            type="number"
-            value={moistureThreshold}
-            onChange={handleMoistureThresholdChange}
-            className="form-control"
-            min="0"
-            max="100"
-          />
+          <h5 className="mt-4">Threshold Emote Suhu</h5>
+          <label>Panas (&gt;):</label>
+          <input type="number" value={threshold.emote.panas}
+            onChange={e => handleChange("emote", "panas", e.target.value)} className="form-control" />
+          <label>Cerah (min):</label>
+          <input type="number" value={threshold.emote.cerah_min}
+            onChange={e => handleChange("emote", "cerah_min", e.target.value)} className="form-control" />
+          <label>Cerah (max):</label>
+          <input type="number" value={threshold.emote.cerah_max}
+            onChange={e => handleChange("emote", "cerah_max", e.target.value)} className="form-control" />
+          <label>Mendung (min):</label>
+          <input type="number" value={threshold.emote.mendung_min}
+            onChange={e => handleChange("emote", "mendung_min", e.target.value)} className="form-control" />
+          <label>Mendung (max):</label>
+          <input type="number" value={threshold.emote.mendung_max}
+            onChange={e => handleChange("emote", "mendung_max", e.target.value)} className="form-control" />
 
           <button onClick={handleSave} className="btn mt-3">
-            Save Settings
+            Simpan Threshold
           </button>
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
         </div>
-        {/* <div className="information col-6">
-          <p className="info-kelembaban">Klasifikasi</p>
-          <div class="accordion accordion-flush" id="accordionFlushExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingOne">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseOne"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseOne"
-                >
-                  Palawija
-                </button>
-              </h2>
-              <div
-                id="flush-collapseOne"
-                class="accordion-collapse collapse"
-                aria-labelledby="flush-headingOne"
-                data-bs-parent="#accordionFlushExample"
-              >
-                <div class="accordion-body">
-                  <ol>
-                    <li>Jagung</li>
-                    <dd>Kelembaban Tanah : 30%-50%</dd>
-                    <li>Kedelai</li>
-                    <dd>Kelembaban Tanah : 30%-50%</dd>
-                  </ol>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingTwo">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseTwo"
-                >
-                  Sayuran
-                </button>
-              </h2>
-              <div
-                id="flush-collapseTwo"
-                class="accordion-collapse collapse"
-                aria-labelledby="flush-headingTwo"
-                data-bs-parent="#accordionFlushExample"
-              >
-                <div class="accordion-body">
-                  <ol>
-                    <li>Sayur Daun</li>
-                    <dd>Kelembaban Tanah : 30%-50%</dd>
-                    <li>Cabai</li>
-                    <dd>Kelembaban Tanah : 40%-60%</dd>
-                    <li>Tomat</li>
-                    <dd>Kelembaban Tanah : 30%-50%</dd>
-                    <li>Kentang</li>
-                    <dd>Kelembaban Tanah : 30%-50%</dd>
-                  </ol>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingThree">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseThree"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseThree"
-                >
-                  Tanaman Perkebunan
-                </button>
-              </h2>
-              <div
-                id="flush-collapseThree"
-                class="accordion-collapse collapse"
-                aria-labelledby="flush-headingThree"
-                data-bs-parent="#accordionFlushExample"
-              >
-                <div class="accordion-body">
-                  <ol>
-                    <li>Padi</li>
-                    <dd>Kelembaban Tanah : 30%-50%</dd>
-                    <li>Kopi</li>
-                    <dd>Kelembaban Tanah : 30%-50%</dd>
-                    <li>Tebu</li>
-                    <dd>Kelembaban Tanah : 30%-50%</dd>
-                    <li>Kelapa Sawit</li>
-                    <dd>Kelembaban Tanah : 30%-50%</dd>
-                    <li>Kakao</li>
-                    <dd>Kelembaban Tanah : 30%-50%</dd>
-                    <li>Pisang</li>
-                    <dd>Kelembaban Tanah : 30%-50%</dd>
-                  </ol>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );

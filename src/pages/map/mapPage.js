@@ -1,82 +1,83 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import mqtt from "mqtt";
 import "leaflet/dist/leaflet.css";
 import "../../css/map.css";
 
-// Fix default icon issue with Leaflet in React
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-iconRetinaUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
-iconUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-shadowUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-});
+const iconModern = (color) =>
+  new L.Icon({
+    iconUrl: "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/svgs/solid/location-dot.svg",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+    className: `marker-${color}`,
+  });
 
-const MQTT_BROKER = "wss://9bb714241f0940c98be99b31c2e310ed.s1.eu.hivemq.cloud:8884/mqtt";
-const NODE_TOPICS = ["NODE_01/koordinat", "NODE_02/koordinat"];
+function getIconByCondition(condition) {
+  if (condition === "normal") return iconModern("green");
+  if (condition === "peringatan") return iconModern("yellow");
+  if (condition === "bahaya") return iconModern("red");
+  return iconModern("green");
+}
 
-function MapPage() {
-const [devices, setDevices] = useState({});
+function MapPage({ sensorDataNodes }) {
+  const [now, setNow] = useState(Date.now());
 
-useEffect(() => {
-    const client = mqtt.connect(MQTT_BROKER, {
-    username: "terrasentry",
-    password: "Indrakenz1.",
-    });
+  // Update waktu setiap detik agar marker bisa hilang otomatis
+  useEffect(() => {
+    const interval = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(interval);
+  }, []);
 
-    client.on("connect", () => {
-        NODE_TOPICS.forEach((topic) => client.subscribe(topic));
-    });
+  // Filter device yang masih aktif (<30 detik)
+  const activeDevices = Object.values(sensorDataNodes || {}).filter(
+    (device) => now - (device.lastUpdate || 0) < 1000
+  );
 
-    client.on("message", (topic, message) => {
-        try {
-        const data = JSON.parse(message.toString());
-        setDevices((prev) => ({
-            ...prev,
-            [topic]: { ...data, topic },
-        }));
-    } catch (e) {
-        // Handle parsing error
-        }
-    });
-
-    return () => client.end();
-}, []);
-
-    return (
+  return (
     <div className="map-page-container">
-    <div className="map-card">
+      <div className="map-card">
         <MapContainer
-        center={[-2.5489, 118.0149]}
-        zoom={5}
-        scrollWheelZoom={true}
-        className="custom-map"
+          center={[-2.5489, 118.0149]}
+          zoom={5}
+          scrollWheelZoom={true}
+          className="custom-map"
         >
-        <TileLayer
-            attribution=''
+          <TileLayer
+            attribution=""
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {Object.values(devices).map((device) => (
-            <Marker key={device.topic} position={[device.lat, device.lng]}>
+          />
+          {activeDevices.map((device) =>
+            device.lat && device.long ? (
+              <Marker
+                key={device.deviceId || device.topic}
+                position={[device.lat, device.long]}
+                icon={getIconByCondition(device.kondisi)}
+              >
                 <Popup>
-                <b>{device.topic}</b>
-                <br />
-                Koordinat: {device.lat}, {device.lng}
-                <br />
-                Kelembapan: {device.kelembapan ?? "-"}
-                <br />
-                Suhu: {device.suhu ?? "-"}
+                  <b>{device.topic || device.deviceId}</b>
+                  <br />
+                  Koordinat: {device.lat}, {device.long}
+                  <br />
+                  Soil: {device.moisture ?? "-"}
+                  <br />
+                  Humidity: {device.humidity ?? "-"}
+                  <br />
+                  Temperature: {device.temperature ?? "-"}
+                  <br />
+                  Gyro: {device.gyro ?? "-"}
+                  <br />
+                  Acc: {device.acc ?? "-"}
+                  <br />
+                  Updated: {device.lastUpdate ? new Date(device.lastUpdate).toLocaleTimeString() : "-"}
                 </Popup>
-            </Marker>
-        ))}
+              </Marker>
+            ) : null
+          )}
         </MapContainer>
+      </div>
     </div>
-    </div>
-);
+  );
 }
 
 export default MapPage;
