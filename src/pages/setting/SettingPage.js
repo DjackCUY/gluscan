@@ -23,10 +23,15 @@ function SettingPage() {
   };
 
   // Load threshold dari localStorage atau pakai default
-  const [threshold, setThreshold] = useState(() => {
+const [threshold, setThreshold] = useState(() => {
+  try {
     const saved = localStorage.getItem("terra_threshold");
     return saved ? JSON.parse(saved) : defaultThreshold;
-  });
+  } catch (e) {
+    console.error("Failed to parse localStorage threshold:", e);
+    return defaultThreshold;
+  }
+});
 
   // Handler input
   const handleChange = (section, key, value) => {

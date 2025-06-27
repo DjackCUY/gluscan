@@ -21,11 +21,19 @@ const defaultThreshold = {
   },
 };
 
-const threshold = JSON.parse(localStorage.getItem("terra_threshold")) || defaultThreshold;
 
 function ChartPage({ sensorDataNodes }) {
   const nodeList = Object.keys(sensorDataNodes || {});
   const [selectedNode, setSelectedNode] = useState(nodeList[0] || "");
+  const threshold = useMemo(() => {
+    try {
+      const saved = localStorage.getItem("terra_threshold");
+      return saved ? JSON.parse(saved) : defaultThreshold;
+    } catch (e) {
+      console.error("Failed to parse threshold from localStorage:", e);
+      return defaultThreshold;
+    }
+  }, []);
 
   useEffect(() => {
     if (!selectedNode && nodeList.length > 0) {
