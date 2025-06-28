@@ -41,7 +41,7 @@ function MapPage({ sensorDataNodes }) {
 
   // Filter device yang masih aktif (<30 detik)
   const activeDevices = Object.values(sensorDataNodes || {}).filter(
-    (device) => now - (device.lastUpdate || 0) < 30000
+    (device) => now - (device.lastUpdate || 0) < 1000
   );
 
   return (
