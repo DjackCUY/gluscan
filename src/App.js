@@ -15,6 +15,36 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./css/App.css";
 import { Navbar, Nav, Container } from "react-bootstrap";
 
+const defaultThreshold = {
+  conclusion: {
+    tanah_bahaya: 70,
+    giro_bahaya: 15,
+    udara_bahaya: 85,
+    tanah_siaga_min: 40,
+    tanah_siaga_max: 60,
+    udara_siaga: 60,
+    giro_siaga: 5,
+  }
+};
+
+function getKondisi({ moisture, gyro, humidity }) {
+  if (
+    moisture > defaultThreshold.conclusion.tanah_bahaya &&
+    (gyro > defaultThreshold.conclusion.giro_bahaya || gyro < -defaultThreshold.conclusion.giro_bahaya) &&
+    humidity > defaultThreshold.conclusion.udara_bahaya
+  ) {
+    return "💀 Bahaya";
+  } else if (
+    moisture > defaultThreshold.conclusion.tanah_siaga_min &&
+    moisture < defaultThreshold.conclusion.tanah_siaga_max &&
+    humidity > defaultThreshold.conclusion.udara_siaga &&
+    (gyro > defaultThreshold.conclusion.giro_siaga || gyro < -defaultThreshold.conclusion.giro_siaga)
+  ) {
+    return "⚠️ Peringatan";
+  }
+  return "🟢 Normal";
+}
+
 const MQTT_BROKER = "wss://9bb714241f0940c98be99b31c2e310ed.s1.eu.hivemq.cloud:8884/mqtt";
 const NODE_TOPICS = ["TERRA-1", "TERRA-2", "TERRA-3"];
 
@@ -45,7 +75,16 @@ function App() {
             .reduce((obj, [k, v]) => ({ ...obj, [k]: v }), {});
           return {
             ...filtered,
-            [data.deviceId || topic]: { ...data, topic, lastUpdate: now },
+            [data.deviceId || topic]: {
+              ...data,
+              topic,
+              lastUpdate: now,
+              kondisi: getKondisi({
+                moisture: data.moisture,
+                gyro: data.gyro,
+                humidity: data.humidity,
+              }),
+            },
           };
         });
       } catch (e) {

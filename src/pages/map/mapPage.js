@@ -6,18 +6,28 @@ import "../../css/map.css";
 
 const iconModern = (color) =>
   new L.Icon({
-    iconUrl: "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/svgs/solid/location-dot.svg",
+    iconUrl:
+      color === "green"
+        ? "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
+        : color === "yellow"
+        ? "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+        : color === "red"
+        ? "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
+        : "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
     iconSize: [32, 32],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32],
-    className: `marker-${color}`,
   });
 
+const iconCache = {};
 function getIconByCondition(condition) {
-  if (condition === "normal") return iconModern("green");
-  if (condition === "peringatan") return iconModern("yellow");
-  if (condition === "bahaya") return iconModern("red");
-  return iconModern("green");
+  let color = "green";
+  if (condition === "⚠️ Peringatan") color = "yellow";
+  if (condition === "💀 Bahaya") color = "red";
+  if (!iconCache[color]) {
+    iconCache[color] = iconModern(color);
+  }
+  return iconCache[color];
 }
 
 function MapPage({ sensorDataNodes }) {
@@ -31,7 +41,7 @@ function MapPage({ sensorDataNodes }) {
 
   // Filter device yang masih aktif (<30 detik)
   const activeDevices = Object.values(sensorDataNodes || {}).filter(
-    (device) => now - (device.lastUpdate || 0) < 1000
+    (device) => now - (device.lastUpdate || 0) < 30000
   );
 
   return (
@@ -55,21 +65,14 @@ function MapPage({ sensorDataNodes }) {
                 icon={getIconByCondition(device.kondisi)}
               >
                 <Popup>
-                  <b>{device.topic || device.deviceId}</b>
+                  <b>#{device.deviceId}</b>
                   <br />
-                  Koordinat: {device.lat}, {device.long}
                   <br />
-                  Soil: {device.moisture ?? "-"}
+                  <b>Koordinat:</b> {device.lat}, {device.long}
                   <br />
-                  Humidity: {device.humidity ?? "-"}
+                  <b>Kondisi:</b> {device.kondisi ?? "-"}
                   <br />
-                  Temperature: {device.temperature ?? "-"}
-                  <br />
-                  Gyro: {device.gyro ?? "-"}
-                  <br />
-                  Acc: {device.acc ?? "-"}
-                  <br />
-                  Updated: {device.lastUpdate ? new Date(device.lastUpdate).toLocaleTimeString() : "-"}
+                  <b>Updated:</b> {device.lastUpdate ? new Date(device.lastUpdate).toLocaleTimeString() : "-"}
                 </Popup>
               </Marker>
             ) : null
