@@ -36,9 +36,9 @@ $stmt_read->execute();
 $result = $stmt_read->get_result();
 $all_reading = $result->fetch_all(MYSQLI_ASSOC);
 
-foreach ($all_reading as $reading) {
-    echo "{$reading['nilai']} mg/dL - {$reading['jenis']} - {$reading['time']}<br>";
-}
+// foreach ($all_reading as $reading) {
+//     echo "{$reading['nilai']} mg/dL - {$reading['jenis']} - {$reading['time']}<br>";
+// }
 
 
 // Simulasi data report untuk grafik
